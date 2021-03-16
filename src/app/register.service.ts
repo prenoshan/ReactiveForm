@@ -11,7 +11,7 @@ export class RegisterService {
 
   addUser(email: string, password: string, imageBase64: string){
 
-    const user: User = {email: email, password: password, imageBase64: imageBase64};
+    const user: User = {email: email, password: password, image: imageBase64};
 
     this.http.post("https://localhost:44341/api/users", user).subscribe((res) =>{
 
