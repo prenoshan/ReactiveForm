@@ -1,6 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import * as _ from 'lodash';
+import { RegisterService } from '../register.service';
 
 @Component({
   selector: 'app-register',
@@ -53,9 +54,6 @@ export class RegisterComponent implements OnInit {
         this.imageBase64 = imageBase64Path;
         this.isImageSaved = true;
 
-        //image's base64 string
-        console.log(this.imageBase64)
-
       }
 
       reader.readAsDataURL(event.target.files[0]);
@@ -68,7 +66,7 @@ export class RegisterComponent implements OnInit {
     this.imageBase64 = null;
 }
 
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(private formBuilder: FormBuilder, public registerService: RegisterService) { }
 
   ngOnInit(): void {
 
@@ -95,7 +93,7 @@ export class RegisterComponent implements OnInit {
 
     }
 
-    console.log("submitted without error")
+    this.registerService.addUser(this.formFields["email"].value, this.formFields["password"].value, this.imageBase64);
 
   }
 
