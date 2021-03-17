@@ -13,11 +13,24 @@ export class RegisterService {
 
     const user: User = {email: email, password: password, image: imageBase64};
 
-    this.http.post("https://localhost:44341/api/users", user).subscribe((res) =>{
+    this.http.post("https://localhost:44341/api/users", user).subscribe(
+      (res: Response) => {
 
-    console.log("successful")
+        console.log("success");
 
-    })
+      },
+
+      err =>{
+
+        if(err.status == 400){
+
+          alert(err.error)
+
+        }
+
+      }
+
+    );
 
   }
 
